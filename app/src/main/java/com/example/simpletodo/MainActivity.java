@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.*;
 
@@ -43,6 +45,28 @@ public class MainActivity extends AppCompatActivity {
         rvItems.setLayoutManager(new LinearLayoutManager(this));
 
 
+        //Onclick listener - Add
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            // Someone clicked
+            public void onClick(View v) {
+                // get text from edit box & make it a string
+                String todoItem = etItem.getText().toString();
+
+                // add item to the model
+                items.add(todoItem);
+
+                //Notify adapter that an item is inserted and the position/index of the item
+                itemsAdapter.notifyItemInserted(items.size() - 1);
+
+                // clear edit text box
+                etItem.setText("");
+
+                Toast.makeText(getApplicationContext(), "Item was added", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
 
     }
 }
